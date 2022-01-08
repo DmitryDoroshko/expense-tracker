@@ -1,9 +1,11 @@
 import React from "react";
 import ExpenseItem from "./../ExpenseItem/ExpenseItem";
+import "./Expenses.css";
+import Card from "../../UI/Card/Card";
 
 export default function Expenses({ expenses }) {
     return (
-        <div className="expenses">
+        <Card className="expenses">
             {expenses.map((expense) => {
                 return (
                     <ExpenseItem
@@ -14,6 +16,6 @@ export default function Expenses({ expenses }) {
                     />
                 );
             })}
-        </div>
+        </Card>
     );
 }
