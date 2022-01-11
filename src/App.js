@@ -13,7 +13,7 @@ function App() {
     };
 
     return (
-        <>
+        <>  
             <NewExpense onAddNewExpense={addNewExpenseHandler} />
             <Expenses expenses={expenses} />
         </>

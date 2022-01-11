@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 export default function ExpenseForm(props) {
     const { onAddNewExpense } = props;
 
+    const [isFormActive, setIsFormActive] = useState(false);
+
     const [enteredTitle, setEnteredTitle] = useState("");
     const [enteredAmount, setEnteredAmount] = useState("");
     const [enteredDate, setEnteredDate] = useState("");
@@ -36,43 +38,59 @@ export default function ExpenseForm(props) {
         };
 
         onAddNewExpense(newExpense);
+        setIsFormActive((prev) => !prev);
     };
 
-    return (
-        <form onSubmit={formSubmitHandler}>
-            <div className="new-expense__controls">
-                <div className="new-expense__control">
-                    <label>Title</label>
-                    <input
-                        type="text"
-                        value={enteredTitle}
-                        onChange={titleChangeHandler}
-                    />
-                </div>
-                <div className="new-expense__control">
-                    <label>Amount</label>
-                    <input
-                        type="number"
-                        min="0.01"
-                        step="0.01"
-                        value={enteredAmount}
-                        onChange={amountChangeHandler}
-                    />
-                </div>
-                <div className="new-expense__control">
-                    <label>Date</label>
-                    <input
-                        type="date"
-                        min="2019-01-01"
-                        max="2022-12-31"
-                        value={enteredDate}
-                        onChange={dateChangeHandler}
-                    />
-                </div>
-            </div>
-            <div className="new-expense__actions">
-                <button type="submit">Add Expense</button>
-            </div>
-        </form>
+    const negateIsFormActive = () => {
+        setIsFormActive((prev) => !prev);
+    };
+
+    let content = (
+        <div className="new-expense__actions new-expense__actions--center">
+            <button onClick={negateIsFormActive}>Add New Expense</button>
+        </div>
     );
+
+    if (isFormActive) {
+        content = (
+            <form onSubmit={formSubmitHandler}>
+                <div className="new-expense__controls">
+                    <div className="new-expense__control">
+                        <label>Title</label>
+                        <input
+                            type="text"
+                            value={enteredTitle}
+                            onChange={titleChangeHandler}
+                        />
+                    </div>
+                    <div className="new-expense__control">
+                        <label>Amount</label>
+                        <input
+                            type="number"
+                            min="0.01"
+                            step="0.01"
+                            value={enteredAmount}
+                            onChange={amountChangeHandler}
+                        />
+                    </div>
+                    <div className="new-expense__control">
+                        <label>Date</label>
+                        <input
+                            type="date"
+                            min="2019-01-01"
+                            max="2022-12-31"
+                            value={enteredDate}
+                            onChange={dateChangeHandler}
+                        />
+                    </div>
+                </div>
+                <div className="new-expense__actions">
+                    <button onClick={negateIsFormActive}>Cancel</button>
+                    <button type="submit">Add Expense</button>
+                </div>
+            </form>
+        );
+    }
+
+    return content;
 }
