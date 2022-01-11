@@ -5,6 +5,7 @@ import Card from "../../UI/Card/Card";
 import ExpenseFilter from "../ExpenseFilter/ExpensesFilter";
 import { initialSelectedYear } from "../../../utils/constants";
 import ExpensesList from "./../ExpensesList/ExpensesList";
+import ExpensesChart from "./../ExpensesChart/ExpensesChart";
 
 export default function Expenses(props) {
     const { expenses } = props;
@@ -40,6 +41,7 @@ export default function Expenses(props) {
     return (
         <Card className="expenses">
             <ExpenseFilter onSelectedYearChange={selectedYearChangeHandler} />
+            <ExpensesChart expenses={selectedExpenses} />
             <ExpensesList
                 selectedYear={selectedYear}
                 selectedExpenses={selectedExpenses}

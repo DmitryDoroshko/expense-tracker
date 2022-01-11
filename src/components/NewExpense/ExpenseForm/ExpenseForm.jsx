@@ -33,7 +33,7 @@ export default function ExpenseForm(props) {
         const newExpense = {
             id: uuidv4(),
             title: enteredTitle,
-            amount: enteredAmount,
+            amount: +enteredAmount,
             date: new Date(enteredDate),
         };
 
@@ -85,7 +85,9 @@ export default function ExpenseForm(props) {
                     </div>
                 </div>
                 <div className="new-expense__actions">
-                    <button onClick={negateIsFormActive}>Cancel</button>
+                    <button type="button" onClick={negateIsFormActive}>
+                        Cancel
+                    </button>
                     <button type="submit">Add Expense</button>
                 </div>
             </form>
