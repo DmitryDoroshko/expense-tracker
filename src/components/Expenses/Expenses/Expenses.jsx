@@ -36,19 +36,25 @@ export default function Expenses(props) {
         });
     }, [expenses, selectedYear]);
 
+    let expensesContent = `No expenses for year ${selectedYear} available`;
+
+    if (selectedExpenses.length !== 0) {
+        expensesContent = selectedExpenses.map((expense) => {
+            return (
+                <ExpenseItem
+                    key={expense.id}
+                    title={expense.title}
+                    amount={expense.amount}
+                    date={expense.date}
+                />
+            );
+        });
+    }
+
     return (
         <Card className="expenses">
             <ExpenseFilter onSelectedYearChange={selectedYearChangeHandler} />
-            {selectedExpenses.map((expense) => {
-                return (
-                    <ExpenseItem
-                        key={expense.id}
-                        title={expense.title}
-                        amount={expense.amount}
-                        date={expense.date}
-                    />
-                );
-            })}
+            {expensesContent}
         </Card>
     );
 }
